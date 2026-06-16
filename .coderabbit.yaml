@@ -1,11 +1,26 @@
-# CodeRabbit config - template-vite-tool
+# CodeRabbit config - template-vite-tool (Vite starter template)
 # Docs: https://docs.coderabbit.ai/getting-started/configure-coderabbit
+language: en-US
 reviews:
-  profile: chill              # switch to "assertive" for pickier reviews
+  profile: assertive          # was "chill"
   high_level_summary: true
   poem: false
+  review_status: true
+  auto_review:
+    enabled: true
+    drafts: false
   path_filters:
     - "!dist/**"              # generated output - never review
-
+    - "!node_modules/**"
+  path_instructions:
+    - path: "src/**"
+      instructions: >-
+        Focus on logic bugs and async correctness. Because this is a starter
+        template that gets forked, also flag leftover placeholder text, stray
+        TODO/FIXME markers, and anything hardcoded that should be configurable
+        per fork.
+    - path: "**/*"
+      instructions: >-
+        Flag any committed secret, API key, token, or credential in plain text.
 chat:
   auto_reply: true
