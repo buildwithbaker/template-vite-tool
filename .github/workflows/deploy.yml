@@ -31,6 +31,8 @@ jobs:
 
   deploy:
     needs: build
+    # The template repo itself has no Pages site; repos generated from it deploy normally.
+    if: github.repository != 'buildwithbaker/template-vite-tool'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

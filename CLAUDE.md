@@ -14,9 +14,11 @@ See @README.md for what this project is and why.
 - Deploy: GitHub Pages auto-deploys from main via .github/workflows/deploy.yml
   (swap for Cloudflare Pages / another host as needed). Deploys on merge to main.
 
-## Branching (main is protected - PR only)
+## Branching (PR only - main is NOT branch-protected)
 
-`main` is protected: direct pushes are rejected. **Never run `git push origin main`.**
+`main` is deliberately NOT branch-protected (decided 2026-09-23), so a direct push would
+succeed. Changes still ship via branch + PR - this flow is honor-system and not optional.
+**Never run `git push origin main`.**
 
 1. `git checkout main && git pull origin main` - start from an up-to-date main
 2. `git checkout -b <type>/<slug>` - branch BEFORE staging, so local `main` never diverges
@@ -31,7 +33,9 @@ See @README.md for what this project is and why.
 Never merge while a required check is failing or pending, and never disable a check to
 force a merge through - stop and report instead.
 
-Merging deploys to GitHub Pages via `.github/workflows/deploy.yml`.
+Merging deploys to GitHub Pages via `.github/workflows/deploy.yml` in repos generated from this
+template. In the template repo itself the deploy job is skipped (it has no Pages site); the build
+job still runs.
 
 ## File organization (root is locked)
 Do not add files to the repo root unless they are in the permitted-root-files
