@@ -14,11 +14,12 @@ See @README.md for what this project is and why.
 - Deploy: GitHub Pages auto-deploys from main via .github/workflows/deploy.yml
   (swap for Cloudflare Pages / another host as needed). Deploys on merge to main.
 
-## Branching (PR only - main is NOT branch-protected)
+## Branching (PR only)
 
-`main` is deliberately NOT branch-protected (decided 2026-09-23), so a direct push would
-succeed. Changes still ship via branch + PR - this flow is honor-system and not optional.
-**Never run `git push origin main`.**
+In the template repo itself, `main` is branch-protected (since 2026-09-27): the `build` check is
+required, admins included, and force pushes and deletions are blocked. Repos generated from this
+template do NOT inherit protection - until one enables it (see README), a direct push there would
+succeed. Either way, changes ship via branch + PR. **Never run `git push origin main`.**
 
 1. `git checkout main && git pull origin main` - start from an up-to-date main
 2. `git checkout -b <type>/<slug>` - branch BEFORE staging, so local `main` never diverges
@@ -26,7 +27,7 @@ succeed. Changes still ship via branch + PR - this flow is honor-system and not 
 4. `git commit -m "<message>"`
 5. `git push -u origin <branch>`
 6. `gh pr create --base main --fill`
-7. `gh pr checks <branch> --watch` - wait for the required checks
+7. `gh pr checks <branch> --watch` - wait for the checks (`build` is required once protection is on)
 8. `gh pr merge <branch> --squash --delete-branch`
 9. `git checkout main && git pull origin main`
 
